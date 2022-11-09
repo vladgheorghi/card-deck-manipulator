@@ -1,0 +1,85 @@
+Gheorghiu Doru-Vlad
+Facultatea de Automatica si Calculatoare, UPB
+312CA
+
+Data Structures, Homework 1: Now You See Me
+
+Brief Description:
+
+Command line interface with various commands for manipulating card decks using
+double-linked lists. You can add and delete decks or cards from a specified deck,
+find how many decks you have or cards in a deck and even use more special operations
+like merging two decks, or shuffling, reversing, spliting and sorting a deck. The
+program stores cards by a value between 1 and 14 and by a symbol (HEART, SPADE, CLUB,
+DIAMOND). Other given values or symbols are considered invalid and should be replaced
+by valid ones. The program runs until the 'EXIT' command is specified and all allocated
+data is freed.
+
+The program uses a generic implemented double-linked list to store the decks and each
+node's data has a same declared double-linked list to store each card into one deck
+(a list of lists shortly).
+
+Commands:
+
+> ADD_DECK <number_cards>
+> DEL_DECK <deck_index>
+> DEL_CARD <deck_index> <card_index>
+> ADD_CARDS <deck_index> <number_cards>
+> DECK_NUMBER
+> DECK_LEN <deck_index>
+> SHUFFLE_DECK <deck_index>
+> MERGE_DECKS <deck_index1> <deck_index2>
+> SPLIT_DECK <deck_index>
+> REVERSE_DECK <deck_index>
+> SHOW_DECK <deck_index>
+> SHOW_ALL
+> SORT_DECK <deck_index>
+> EXIT
+
+More Details:
+
+Each command function (the ones called into main.c switch case) are of 'error'
+data type. They return a specific error (see below) if there has been any in the
+function or 'VALID' if there wasn't. At the end of main.c while, function
+'verify_status()' verifies if there were any errors and prints a suitable message.
+
+Function 'add_node()' can be used more generically. It can add nodes of any data types
+into a list. So in this program I used this function to add cards into decks and also
+decks into the deck list (but you have to specify that to parameter is_deck_list).
+
+As for command inputs, the program reads each whole line as a string and then uses
+various functions (see functions 'assign_command()', 'assign_parameters()') to
+separate the whole string into smaller strings that reffer to each parameter. Any
+input line with more parameters than 'MAXPARAM' is considered as INVALID_COMMAND.
+The 'command' data type is a typedef enum that reffers to a command (see upper)
+that is used to differentiate cases into the main.c switch.
+
+Errors:
+
+> DECK_INDEX_OUT_OF_BOUNDS
+> CARD_INDEX_OUT_OF_BOUNDS
+> INVALID_CARD
+> INVALID_COMMAND
+
+Comments:
+
+I personally think that the program can be more efficient, because in commands such as
+'MERGE_DECKS', 'SPLIT_DECK', 'REVERSE_DECK' I created a new deck where I made the
+transformations, instead of doing them straight in the specified deck, for debugging
+reasons and because I didn't wanted to overcomplicate things. (briefly, the auxiliary
+allocated memory can be reduced).
+
+I also think that the sorting algorithm I used can be more sharpened.
+
+From this homework I think I solidified my knowledge about linked lists, pointers and
+also I sharpened my debugging skills (I observed that I resolved bugs and memory leaks
+faster and more accurately than I did in my previous homework). I also practiced my work
+with multiple source and header files, with dynamic allocation and with creating an interface
+command line.
+
+I really enjoyed doing this homework, it was pretty interesting from all perspectives.
+
+Resources:
+
+There aren't any specific links that I should include here, I just used Stack Overflow a lot
+when I got stuck into a Segmentation Fault or Valgrind error. :)
